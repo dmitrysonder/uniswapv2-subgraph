@@ -26,6 +26,8 @@ dataSources:
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: handlePairCreated
+      blockHandlers:
+        - handler: handleBlock
       file: ./src/mappings.ts
 templates:
   - kind: ethereum/contract
@@ -46,6 +48,5 @@ templates:
           file: ./abis/UniswapV2Pair.json
         - name: UniswapV2Factory
           file: ./abis/UniswapV2Factory.json
-      blockHandlers:
-        - handler: handleBlock
+
         

@@ -6,7 +6,6 @@ import { UniswapV2Pair as UniswapV2PairAbi } from "../generated/UniswapV2Factory
 import { getTokenSymbol, getTokenDecimals, FACTORY_ADDRESS } from "./helpers";
 
 export function handlePairCreated(event: PairCreated): void {
-  UniswapV2Pair.create(event.params.pair);
 
   let factory = Factory.load(FACTORY_ADDRESS);
   if (factory === null) {
@@ -35,6 +34,9 @@ export function handlePairCreated(event: PairCreated): void {
   pair.Asset1 = asset1.id;
   pair.Blocks = [];
   factory.pairs.push(pair.id);
+
+  UniswapV2Pair.create(event.params.pair);
+
   asset0.save();
   asset1.save();
   factory.save();
