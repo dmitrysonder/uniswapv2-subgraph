@@ -14,11 +14,38 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - PairCreated
+        - Pair
+        - Asset
       abis:
         - name: UniswapV2Factory
           file: ./abis/UniswapV2Factory.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: UniswapV2Pair
+          file: ./abis/UniswapV2Pair.json
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: handlePairCreated
-      file: ./src/uniswap-v-2-factory.ts
+      file: ./src/mappings.ts
+templates:
+  - kind: ethereum/contract
+    name: UniswapV2Pair
+    network: arbitrum-one
+    source:
+      abi: UniswapV2Pair
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings.ts
+      entities:
+        - Pair
+        - Asset
+      abis:
+        - name: UniswapV2Pair
+          file: ./abis/UniswapV2Pair.json
+        - name: UniswapV2Factory
+          file: ./abis/UniswapV2Factory.json
+      blockHandlers:
+        - handler: handleBlock
+        

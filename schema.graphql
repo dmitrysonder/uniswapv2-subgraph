@@ -1,10 +1,26 @@
-type PairCreated @entity(immutable: true) {
-  id: Bytes!
-  token0: Bytes! # address
-  token1: Bytes! # address
-  pair: Bytes! # address
-  param3: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+type Pair @entity(immutable: true) {
+  id: ID!
+  Asset0: Asset!
+  Asset1: Asset!
+  Blocks: [BlockData!]!
+}
+
+type Asset @entity {
+  id: ID! # token address
+  symbol: String!
+  decimals: BigInt!
+}
+
+type BlockData @entity {
+  id: ID!
+  pair: Pair!
+  blockNumber: Int!
+  timestamp: Int!
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+}
+
+type Factory @entity {
+  id: ID!
+  pairs: [Pair!]!
 }
