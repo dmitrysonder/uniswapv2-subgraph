@@ -1,0 +1,8 @@
+{
+  "arbitrum-one": {
+    "UniswapV2Factory": {
+      "address": "0x20fAfD2B0Ba599416D75Eb54f48cda9812964f46",
+      "startBlock": 46646983
+    }
+  }
+}
